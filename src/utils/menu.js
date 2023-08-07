@@ -37,7 +37,7 @@ module.exports = [
   },
   {
     key: 'setting',
-    name: 'Setting',
+    name: 'Settings',
     icon: 'setting',
     child: [
       {
@@ -45,6 +45,12 @@ module.exports = [
         key: 'setting',
         name: 'General',
         icon: 'setting',
+      },
+      {
+        show: true,
+        key: 'storageClass',
+        name: 'Storage Classes',
+        icon: 'copy',
       },
       {
         show: true,

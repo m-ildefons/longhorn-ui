@@ -19,6 +19,7 @@ import orphanedDataComponent from './routes/orphanedData/'
 import engineimageDetailComponent from './routes/engineimage/detail'
 import systemBackupsComponent from './routes/systemBackups/'
 import objectEndpointComponent from './routes/objectEndpoint/'
+import storageClassComponent from './routes/storageClass/'
 
 const Routers = function ({ history, app }) {
   const App = dynamic({
@@ -101,6 +102,10 @@ const Routers = function ({ history, app }) {
     component: () => objectEndpointComponent,
   })
 
+  const storageClass = dynamic({
+    app,
+    component: () => storageClassComponent,
+  })
   const path = '/'
 
   return (
@@ -117,6 +122,7 @@ const Routers = function ({ history, app }) {
             <Route path={`${path}backup/:id`} component={backupDetail} />
             <Route path={`${path}setting`} component={setting} />
             <Route exact path={`${path}engineimage`} component={engineimage} />
+            <Route exact path={`${path}storageclass`} component={storageClass} />
             <Route exact path={`${path}instanceManager`} component={instanceManager} />
             <Route exact path={`${path}backingImage`} component={backingImage} />
             <Route exact path={`${path}recurringJob`} component={recurringJob} />

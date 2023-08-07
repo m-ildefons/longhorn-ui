@@ -28,6 +28,7 @@ let pageSizeCollectionObject = {
   instanceManagerSize: 10,
   orphanedDataSize: 10,
   objectEndpointSize: 10,
+  storageClass: 10,
 }
 if (column) {
   columnArr = JSON.parse(column)

@@ -1,4 +1,4 @@
-import { listStorageClasses } from '../services/storageclass'
+import { listStorageClasses, getStorageClass, createStorageClass, deleteStorageClass } from '../services/storageclass'
 import { wsChanges, updateState } from '../utils/websocket'
 import { enableQueryData } from '../utils/dataDependency'
 import queryString from 'query-string'
@@ -28,6 +28,27 @@ export default {
     *query({ payload }, { call, put }) {
       const data = yield call(listStorageClasses, payload)
       yield put({ type: 'listStorageClasses', payload: { ...data } })
+    },
+    *get({ payload }, { call, get }) {
+      const data = yield call(getStorageClass, payload)
+      yield get({ type: 'getStorageClass', payload: { ...data } })
+    },
+    *create({ payload, callback }, { call, put }) {
+      yield call(createStorageClass, payload)
+      if (callback) callback()
+      yield put({ type: 'query' })
+    },
+    *delete({ payload, callback }, { call, put }) {
+      yield call(deleteStorageClass, payload)
+      if (callback) callback()
+      yield put({ type: 'query' })
+    },
+    *bulkDelete({ payload, callback }, { call, put }) {
+      if (payload && payload.length > 0) {
+        yield payload.map(item => call(deleteStorageClass, item))
+      }
+      if (callback) callback()
+      yield put({ type: 'query' })
     },
     *startWS({ payload }, { select }) {
       let ws = yield select(state => state.objectEndpoint.ws)
